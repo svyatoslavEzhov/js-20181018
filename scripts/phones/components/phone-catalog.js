@@ -1,11 +1,10 @@
 import Component from '../../shared/component.js';
 
 export default class PhoneCatalog extends Component {
-  constructor({ element, phones, onPhoneSelected }) {
+  constructor({ element, phones }) {
     super({ element });
 
     this._phones = phones;
-    this._onPhoneSelected = onPhoneSelected;
 
     this._render();
 
@@ -17,7 +16,10 @@ export default class PhoneCatalog extends Component {
 
     if (!phoneLink) return;
 
-    this._onPhoneSelected(phoneLink.dataset.phoneId);
+    let customEvent = new CustomEvent('phoneSelected', {
+      detail: { phoneId: phoneLink.dataset.phoneId }
+    });
+    this._element.dispatchEvent(customEvent);
 
   }
 
