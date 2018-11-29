@@ -6,6 +6,10 @@ export default class Component {
     this._element = element;
   }
 
+  on(eventType, callback) {
+    this._element.addEventListener(eventType, callback);
+  }
+
   show() { this._element.classList.remove(HIDDEN_CLASS) }
 
   hide() { this._element.classList.add(HIDDEN_CLASS) }
