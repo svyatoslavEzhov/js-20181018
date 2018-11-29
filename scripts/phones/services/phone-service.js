@@ -1,7 +1,9 @@
+const BASE_URL = location.pathname;
+
 const PhoneService = {
   _sendRequest(url, { method = 'GET', successCallback }) {
     let xhr = new XMLHttpRequest();
-    xhr.open(method, url, true);
+    xhr.open(method, BASE_URL + url, true);
     xhr.send();
 
     xhr.onload = () => {
@@ -15,13 +17,13 @@ const PhoneService = {
   },
 
   getPhones(callback) {
-    this._sendRequest('/phones/phones.json', {
+    this._sendRequest('phones/phones.json', {
       successCallback: callback,
     });
   },
 
   getPhone(phoneId, callback) {
-    this._sendRequest(`/phones/${phoneId}.json`, {
+    this._sendRequest(`phones/${phoneId}.json`, {
       successCallback: callback,
     });
   }
