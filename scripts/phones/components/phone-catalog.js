@@ -1,12 +1,12 @@
 import Component from '../../shared/component.js';
 
 export default class PhoneCatalog extends Component {
-  constructor({ element, phones }) {
+  constructor({ element }) {
     super({ element });
 
-    this._phones = phones;
-
-    this._render();
+    // this._phones = phones;
+    //
+    // this._render();
 
     this.on('click', '[data-element="phone-link"]', event => this._onPhoneClick(event));
     this.on('click', '[data-element="button-add"]', event => {
@@ -21,6 +21,11 @@ export default class PhoneCatalog extends Component {
     this._trigger('phoneSelected', { phoneId: phoneLink.dataset.phoneId });
   }
 
+  showPhones(phones) {
+    this._phones = phones;
+    this._render();
+    this.show();
+  }
 
 
   _render() {

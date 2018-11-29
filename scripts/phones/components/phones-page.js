@@ -15,19 +15,22 @@ export default class PhonesPage {
     this._initCatalog();
     this._initViewer();
     this._initCart();
+
+    PhoneService.getPhones((phones) => {
+      this._catalog.showPhones(phones);
+    });
   }
 
   _initCatalog() {
     this._catalog = new PhoneCatalog({
       element: this._element.querySelector('[data-component="phone-catalog"]'),
-      phones: PhoneService.getPhones(),
     });
 
     this._catalog.on('phoneSelected', (event) => {
-      let phone = PhoneService.getPhone(event.detail.phoneId);
-
-      this._catalog.hide();
-      this._viewer.showPhone(phone);
+      PhoneService.getPhone(event.detail.phoneId, (phone) => {
+        this._catalog.hide();
+        this._viewer.showPhone(phone);
+      });
     })
 
     this._catalog.on('add', event => {
@@ -88,7 +91,7 @@ export default class PhonesPage {
 
         <!--Main content-->
         <div class="col-md-10">
-           <div data-component="phone-catalog"></div>
+           <div data-component="phone-catalog" class="js-hidden"></div>
            <div data-component="phone-viewer" class="js-hidden"></div>
         </div>
     </div>
