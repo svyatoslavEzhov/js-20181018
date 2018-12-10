@@ -1,31 +1,48 @@
-const BASE_URL = location.pathname;
+import HttpService from '../../shared/services/http-service.js';
 
 const PhoneService = {
-  _sendRequest(url, { method = 'GET', successCallback }) {
-    let xhr = new XMLHttpRequest();
-    xhr.open(method, BASE_URL + url, true);
-    xhr.send();
-
-    xhr.onload = () => {
-      let responseData = JSON.parse(xhr.responseText);
-      successCallback(responseData);
-    }
-
-    xhr.onerror = () => {
-      console.error(xhr.status + ': ' + xhr.statusText);
-    }
-  },
 
   getPhones(callback) {
-    this._sendRequest('phones/phones.json', {
+    HttpService.sendRequest('phones/phones.json', {
       successCallback: callback,
     });
   },
 
   getPhone(phoneId, callback) {
-    this._sendRequest(`phones/${phoneId}.json`, {
-      successCallback: callback,
+    // HttpService.sendRequest(`phones/${phoneId}.json`, {
+    //   successCallback: callback
+    // });
+    let promise = this._sendRequest(`phones/${phoneId}.json`);
+
+    promise.then(callback);
+    promise.then(result => {
+      console.log(result);
+    })
+  },
+
+  _sendRequest(url) {
+    let promise = {
+      _successCallbacks: [],
+
+      then(successCallback) {
+        console.log(successCallback)
+        this._successCallbacks.push(successCallback);
+      },
+
+      _resolve(data) {
+        console.log('resolve')
+        this._successCallbacks.forEach(callback => callback(data));
+      }
+    };
+
+    HttpService.sendRequest(url, {
+      successCallback(data) {
+        console.log('success')
+        promise._resolve(data);
+      }
     });
+
+    return promise;
   }
 }
 

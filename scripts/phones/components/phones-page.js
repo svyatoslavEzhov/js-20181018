@@ -37,13 +37,6 @@ export default class PhonesPage {
       let phoneId = event.detail;
       this._cart.addItem(phoneId)
     })
-      // onPhoneSelected: (phoneId) => {
-      //   let phone = PhoneService.getPhone(phoneId);
-      //
-      //   this._catalog.hide();
-      //   this._viewer.showPhone(phone);
-      // },
-
   }
 
   _initViewer() {

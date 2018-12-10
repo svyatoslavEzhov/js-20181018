@@ -1,13 +1,13 @@
 var express = require('express');
 var app = express();
 
-app.use(function(req,res,next){
-  if (req.url.endsWith('.json')) {
-    setTimeout(next, 1000);
-  } else {
-    next();
-  }
-});
+// app.use(function(req,res,next){
+//   if (req.url.endsWith('.json')) {
+//     setTimeout(next, 1000);
+//   } else {
+//     next();
+//   }
+// });
 
 app.use(express.static(__dirname + '/', {
   setHeaders: function(res, path) {
