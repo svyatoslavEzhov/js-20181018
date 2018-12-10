@@ -16,8 +16,9 @@ export default class PhonesPage {
     this._initViewer();
     this._initCart();
 
-    PhoneService.getPhones((phones) => {
-      this._catalog.showPhones(phones);
+    let phonesPromise = PhoneService.getPhones();
+    phonesPromise.then((sortedFilteredPhones) => {
+      this._catalog.showPhones(sortedFilteredPhones);
     });
   }
 
@@ -27,7 +28,8 @@ export default class PhonesPage {
     });
 
     this._catalog.on('phoneSelected', (event) => {
-      PhoneService.getPhone(event.detail.phoneId, (phone) => {
+      let phonePromise = PhoneService.getPhone(event.detail.phoneId);
+      phonePromise.then((phone) => {
         this._catalog.hide();
         this._viewer.showPhone(phone);
       });
