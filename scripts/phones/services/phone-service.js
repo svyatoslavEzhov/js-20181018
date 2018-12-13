@@ -17,11 +17,17 @@ const PhoneService = {
   },
 
   _filter(phones, query) {
-    return phones;
+    const lowerCaseQuery = query.toLowerCase();
+
+    return phones.filter(
+      phone => phone.name.toLowerCase().includes(lowerCaseQuery)
+    );
   },
 
   _sort(phones, orderField) {
-    return phones;
+    return phones.sort((a, b) => {
+      return a[orderField] > b[orderField] ? 1 : -1;
+    });
   }
 }
 
