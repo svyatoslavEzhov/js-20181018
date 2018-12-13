@@ -25,6 +25,7 @@ const PhoneService = {
   },
 
   _sort(phones, orderField) {
+
     return phones.sort((a, b) => {
       return a[orderField] > b[orderField] ? 1 : -1;
     });
