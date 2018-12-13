@@ -14,6 +14,9 @@ module.exports = {
   mode: 'none',
   watch: true,
   devtool: isProduction ? false : 'source-map',
+  devServer: {
+    contentBase: './public',
+  },
   module: {
     rules: [
       {
