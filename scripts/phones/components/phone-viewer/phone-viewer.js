@@ -1,4 +1,6 @@
-import Component from '../../shared/component.js';
+import Component from '../../../shared/component.js';
+import template from './phone-viewer.hbs';
+import './phone-viewer.css';
 
 export default class PhoneViewer extends Component {
   constructor({ element }) {
@@ -22,25 +24,6 @@ export default class PhoneViewer extends Component {
 
   _render() {
     const { _phone: phone } = this;
-
-    this._element.innerHTML = `
-      <img class="phone" src="${phone.images[0]}">
-
-    <button data-element="button-back">Back</button>
-    <button>Add to basket</button>
-
-
-    <h1>${phone.name}</h1>
-
-    <p>${phone.description}</p>
-
-    <ul class="phone-thumbs">
-        ${phone.images.map(imageSrc => `
-          <li>
-            <img src="${imageSrc}">
-          </li>
-         `).join('')}
-    </ul>
-    `;
+    this._element.innerHTML = template({ phone });
   }
 }

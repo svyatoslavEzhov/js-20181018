@@ -1,4 +1,4 @@
-const BASE_URL = location.pathname;
+// const BASE_URL = location.pathname;
 
 const HttpService = {
   sendRequest(url, method = 'GET') {

@@ -1,7 +1,7 @@
 'use strict';
 
 import PhoneCatalog from './phone-catalog.js';
-import PhoneViewer from './phone-viewer.js';
+import PhoneViewer from './phone-viewer/phone-viewer.js';
 import ShoppingCart from './shopping-cart.js';
 import PhonesFilter from './phones-filter.js';
 
