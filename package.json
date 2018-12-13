@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node server.js",
-    "my-script":"node server.js"
+    "build": "webpack",
+    "my-script": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,15 @@
   },
   "homepage": "https://github.com/stasgavrylov/js-20181018#readme",
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
   }
 }

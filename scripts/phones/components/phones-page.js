@@ -5,7 +5,6 @@ import PhoneViewer from './phone-viewer.js';
 import ShoppingCart from './shopping-cart.js';
 import PhonesFilter from './phones-filter.js';
 
-
 import PhoneService from '../services/phone-service.js';
 
 export default class PhonesPage {
@@ -29,11 +28,18 @@ export default class PhonesPage {
     this._catalog = new PhoneCatalog({
       element: this._element.querySelector('[data-component="phone-catalog"]'),
     });
-    
-    this._catalog.on('phoneSelected', async (event) => {
-      let phone = await PhoneService.getPhone(event.detail.phoneId);
 
-      this._catalog.hide();
+    this._catalog.on('phoneSelected', async (event) => {
+      try {
+        let phone = await PhoneService.getPhone(event.detail.phoneId);
+      } catch(e) {
+        console.error(e);
+      }
+
+    let phone = await PhoneService.getPhone(event.detail.phoneId).catch(e => console.error(e));
+
+
+    this._catalog.hide();
       this._viewer.showPhone(phone);
     })
 

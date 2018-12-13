@@ -9,9 +9,14 @@ var app = express();
 //   }
 // });
 
-app.use(express.static(__dirname + '/', {
+
+
+app.use(express.static(__dirname + '/public/', {
   setHeaders: function(res, path) {
     res.setHeader('Keep-Alive', 'timeout=10')
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
+
+
   }
 }));
 
